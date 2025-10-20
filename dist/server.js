@@ -22,22 +22,21 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(Routes_1.default);
 app.get("/", (req, res) => {
-    res.send({ success: true, message: "I am here" });
+    res.send({ success: true, message: "Server is up and running 🚀" });
 });
 const PORT = config_1.default.port || 4000;
 function server() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            console.log(config_1.default);
-            // ✅ Connect to MongoDB
+            // Connect to MongoDB
             yield mongoose_1.default.connect(config_1.default.database_url);
-            app.listen(config_1.default.port, () => {
-                console.log(`✅ Server is Running on port ${4000}`);
+            console.log("✅ Connected to database");
+            app.listen(PORT, () => {
+                console.log(`✅ Server is running on port ${PORT}`);
             });
-            console.log(`✅ Connected to database`);
         }
         catch (error) {
-            console.error(`❌ Database connection error:`, error);
+            console.error("❌ Database connection error:", error);
         }
     });
 }
